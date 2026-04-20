@@ -1,16 +1,9 @@
 // hftac-naive.cpp
 //
-// Student TODO:
-//   Implement a naive reverse-line printer.
 //
 // Required behavior:
 //   ./hftac-naive <input_file>
 //
-// Suggested approach:
-//   1. Open the file with std::ifstream
-//   2. Read every line using std::getline
-//   3. Store the lines in std::vector<std::string>
-//   4. Print them in reverse order
 //
 // Notes:
 //   - Match the output of the system `tac` command.
@@ -24,21 +17,65 @@
 import std;
 #else // if modules are not supported, include the necessary headers here
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
 #endif
 
 
 //================================================================
 // Function Prototypes
 //================================================================
-
+std::vector<std::string> lines;
 
 //================================================================
 // Main Function
 //================================================================
 int main(int argc, char* argv[]) {
-    (void)argc; // suppress unused parameter warning - you will need to use argc and argv to parse command line arguments
-    (void)argv; // you can remove these lines once you start using argv and argc
+    if (argc != 2) {
+        std::cout << "Usage: ./hftac-naive <input_file>";
+        return 1;
+    }
 
-    std::cerr << "TODO: implement hftac-naive in src/hftac-naive.cpp\n";
-    return 1; // return non-zero to indicate failure until you implement your program
+    std::ifstream file(argv[1]);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file\n";
+        return 1;
+    }
+
+    file.seekg(0, std::ios::end);
+    bool isEmpty = (file.tellg() == 0);
+    if (isEmpty) {
+        file.close();
+        return 0;
+    }
+    file.seekg(-1, std::ios::end);
+    char last;
+    file.get(last);
+    bool trailingNewline = (last == '\n');
+    file.seekg(0, std::ios::beg);
+    
+    std::string line;
+    while (std::getline(file, line)) {
+        lines.push_back(line);
+    }
+
+    for(int i = (int)lines.size() - 1; i > -1; i--) {
+        if (i != 0) {
+            std::cout << lines.at(i) << "\n";
+        }
+        else {
+            line = lines.at(0);
+            std::cout << line;
+            if (trailingNewline) {
+                std::cout << "\n";
+            }
+        }
+    }
+
+    file.close();
+
+
+    return 0;
 }
