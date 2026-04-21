@@ -53,7 +53,6 @@ import std;
 //================================================================
 int block_size = 4096;
 int size_specified = 0;
-bool is_very_end = true;
 int check_block_arg(char* arg);
 int reverse_print(std::vector<char> &v);
 
