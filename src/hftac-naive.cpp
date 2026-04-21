@@ -33,7 +33,7 @@ std::vector<std::string> lines;
 //================================================================
 int main(int argc, char* argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: ./hftac-naive <input_file>";
+        std::cerr << "Usage: ./hftac-naive <input_file>";
         return 1;
     }
 
