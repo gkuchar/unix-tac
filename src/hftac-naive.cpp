@@ -4,10 +4,6 @@
 // Required behavior:
 //   ./hftac-naive <input_file>
 //
-//
-// Notes:
-//   - Match the output of the system `tac` command.
-//   - Pay attention to whether the original file ends with a newline.
 
 
 //================================================================
